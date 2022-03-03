@@ -33,7 +33,7 @@ default_args = {
 }
 
 with DAG(
-        'xcom_dag',
+        'connections_dag',
         start_date=datetime(2021, 1, 1),
         max_active_runs=2,
         schedule_interval=timedelta(minutes=30),
