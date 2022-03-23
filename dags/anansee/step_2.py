@@ -5,14 +5,7 @@ from datetime import datetime, timedelta
 
 
 # Default settings applied to all tasks
-default_args={
-    'depends_on_past': False,
-    'email': ['airflow@example.com'],
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 1,
-    'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
-}
+
 
 
 def print_date(ds):
@@ -20,7 +13,14 @@ def print_date(ds):
     print("This function prints ds")
 
 with DAG( 'anansee first dag',
-    default_args=default_args,
+          default_args={
+              'depends_on_past': False,
+              'email': ['airflow@example.com'],
+              'email_on_failure': False,
+              'email_on_retry': False,
+              'retries': 1,
+              'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
+          },
     description='DAG for task_1 anansee',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 3, 19),
