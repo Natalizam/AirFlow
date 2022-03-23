@@ -19,7 +19,7 @@ def print_date(ds):
     print(ds)
     print("This function prints ds")
 
-with DAG(
+with DAG( 'anansee first dag',
     default_args=default_args,
     description='DAG for task_1 anansee',
     schedule_interval=timedelta(days=1),
@@ -27,6 +27,7 @@ with DAG(
     catchup=False,
     tags=['task1']
 ) as dag:
+
     t1 = BashOperator(
         task_id='print_current_folder',  # id, который будет отображаться в интерфейсе
         bash_command='pwd',  # какую bash команду выполнить в этом таске
@@ -34,11 +35,11 @@ with DAG(
 
 
     t2 = PythonOperator(
-        task_id='print_date',
+        task_id='just_print_date',
         python_callable=print_date,
     )
 
-    t1>>t2
+    t1 >> t2
 
 
 
