@@ -14,6 +14,11 @@ default_args={
     'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
 }
 
+
+def print_date(ds):
+    print(ds)
+    print("This function prints ds")
+
 with DAG(
     default_args=default_args,
     description='DAG for task_1 anansee',
@@ -26,9 +31,7 @@ with DAG(
         task_id='print_current_folder',  # id, который будет отображаться в интерфейсе
         bash_command='pwd',  # какую bash команду выполнить в этом таске
     )
-    def print_date(ds):
-        print(ds)
-        print("This function prints ds")
+
 
     t2 = PythonOperator(
         task_id='print_date',
@@ -41,4 +44,3 @@ with DAG(
 
 
 
-    opr_get_covid_data >> opr_analyze_testing_data
