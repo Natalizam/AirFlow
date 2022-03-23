@@ -3,16 +3,11 @@ from airflow.operators.python_operator import PythonOperator
 from airflow.operators.bash import BashOperator
 from datetime import datetime, timedelta
 
-
-# Default settings applied to all tasks
-
-
-
 def print_date(ds):
     print(ds)
     print("This function prints ds")
 
-with DAG( 'anansee first dag',
+with DAG( 'Hw 2 anansee',
           default_args={
               'depends_on_past': False,
               'email': ['airflow@example.com'],
