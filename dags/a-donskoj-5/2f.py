@@ -6,7 +6,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-        'hw_3_a-donskoj-5',
+        'hw_4_a-donskoj-5',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -15,11 +15,11 @@ with DAG(
             'retries': 1,
             'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
         },
-        description='A simple tutorial DAG',
+        description='task 3',
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 3, 24),
         catchup=False,
-        tags=['task 2'],
+        tags=['task 3'],
 ) as dag:
 
     def func(num):
@@ -32,9 +32,24 @@ with DAG(
                 bash_command=f"echo {i}"
             )
 
+            t.doc_md = dedent(
+                """
+            # BashOperator-TASK
+            This **task** print *10 numbers*!
+            by bash-command `echo {i}`
+            """
+            )
+
         else:
             t = PythonOperator(
                 task_id='task_number_' + str(i),
                 python_callable=func,
                 op_kwargs={'num': i}
             )
+
+            t.doc_md = dedent(
+                """
+            # PythonOperator-TASK
+            This **task** print *20 strings*
+            by function with f-string `task number is: {num}`
+            """)
