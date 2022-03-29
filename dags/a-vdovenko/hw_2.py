@@ -24,15 +24,15 @@ with DAG(
 ) as dag:
     for i in range(31):
         if i <= 10:
-            t1 = BashOperator(
+            task = BashOperator(
                 task_id = f'print_{i}',
                 bash_command = f'echo {i}',
             )
 
-        t2 = PythonOperator(
+        task = PythonOperator(
             task_id = f'print_task_{i}',
             python_callable = print_task_number,
             op_kwargs = {'task_number': i}
     )
 
-    t1 >> t2
+    task
