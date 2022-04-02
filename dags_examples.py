@@ -41,7 +41,7 @@ with DAG(
     t1 >> t2
 
 with DAG(
-    'hw_2_f-turchenko-5',
+    'hw_3_f-turchenko-5',
     default_args={
     'depends_on_past': False,
     'email': ['airflow@example.com'],
