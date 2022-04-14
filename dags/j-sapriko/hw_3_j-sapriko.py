@@ -38,7 +38,7 @@ with  DAG(
             )
             task_bash.doc_md = dedent(
                 """
-                Task Bash Documentation
+                ## Task Bash Documentation
                 This *task* executes `echo {i}` in `bash consol` **airflow**
                 """
             )
@@ -51,7 +51,7 @@ with  DAG(
 
             task_bash.doc_md = dedent(
                 """
-                Task Python Documentation
+                ## Task Python Documentation
                 This *task* surprise surprise prints `task number {i}` in **airflow**
                 """
             )
