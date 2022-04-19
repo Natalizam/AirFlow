@@ -1,7 +1,8 @@
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
-import datetime
+from datetime import datetime, timedelta
+from textwrap import dedent
 
 
 default_args = {
@@ -14,12 +15,14 @@ default_args = {
         }
 
 with DAG(
-    'first dag',
-    #start_date=datetime(2021, 1, 1),
-    #max_active_runs=2,
-   # schedule_interval=timedelta(minutes=30),
+    'first_dag_krylov',
+
+    start_date=datetime(2022, 4, 10),
+    max_active_runs=2,
+    schedule_interval=timedelta(days=1),
     default_args=default_args,
     catchup=False
+
 ) as dag:
     def print_ds(ds):
         print(ds)
