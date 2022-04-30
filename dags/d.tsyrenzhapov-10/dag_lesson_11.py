@@ -6,13 +6,13 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
-from airflow.model import Variable
+from airflow.models import Variable
 
 def val():
     is_startml = Variable.get('is_startml')
     print(is_startml)
 with DAG(
-        'task_10',
+        'task_11_TD',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
