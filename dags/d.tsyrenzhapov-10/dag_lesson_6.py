@@ -29,13 +29,27 @@ with DAG(
             task_id='tasks' + str(i),
             bash_command=f"echo {i}"
         )
-    def context(task_number):
+    def context(task_number, ts, run_id):
+        print(ts)
+        print(run_id)
         return f"task number is: {task_number}"
+
+
+    t1.doc_md = dedent(
+        """
+    #### Task Documentation
+    something should be here idk what to write
+    `from airflow import DAG`
+    *let it be*
+    **where is your love**
+        """
+    )
+
     for i in range(20):
         t2 = PythonOperator(
             task_id='python' + str(i),
             python_callable=context,
-            op_kwargs={'task_number': i}
+            op_kwargs={'task_number': i},
         )
     t1 >> t2
 #%%

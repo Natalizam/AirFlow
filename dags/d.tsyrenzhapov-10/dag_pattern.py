@@ -5,6 +5,7 @@ from airflow import DAG
 
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
+
 with DAG(
         'tutorial',
         default_args={
@@ -21,22 +22,20 @@ with DAG(
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 4, 28),
         catchup=False,
-        tags=['example'],
+        tags=['example']
+
 ) as dag:
-
-    # t1, t2, t3 - это операторы (они формируют таски, а таски формируют даг)
+    templated_command = dedent(
+        """
+        {% for i in range(5) %}
+            echo "{{ ts }}"
+            echo "{{ run_id }}"
+        {% endfor %}
+        """
+    )
+        # Шаблонизация через Jinja
     t1 = BashOperator(
-        task_id='print_date',
-        bash_command='pwd',  # какую bash команду выполнить в этом таске
+        task_id='templated',
+        bash_command=templated_command
     )
-
-    def print_ds(ds):
-        print(ds)
-        return None
-    t2 = PythonOperator(
-        task_id='print_pwd',
-        python_callable=print_ds,
-    )
-    t1 >> t2
-
-
+#%%
