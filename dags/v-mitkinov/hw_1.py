@@ -15,13 +15,14 @@ with DAG(
         'retry_delay': timedelta(minutes=5)
     },
     description="promlem_1",
+    tags=['hw_1_m_zharehina_5'],
 ) as dag:
     t2 = BashOperator(
         task_id='print pwd',
-        bash_command='pwd'
+        bash_command='pwd',
     )
 
-    def print_context(df):
+    def print_context(ds):
         print(ds)
 
     t1 = PythonOperator(
