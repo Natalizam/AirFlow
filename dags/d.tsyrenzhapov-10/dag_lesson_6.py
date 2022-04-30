@@ -7,7 +7,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 
 with DAG(
-        'tutorial',
+        'd.tsyrenzhapov-10_task_6',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
