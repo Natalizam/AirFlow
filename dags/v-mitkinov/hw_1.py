@@ -15,7 +15,7 @@ with DAG(
         'retry_delay': timedelta(minutes=5)
     },
     description="promlem_1",
-    tags=['hw_1_m_zharehina_5'],
+    tags=['hw_1_v-mitkinov'],
 ) as dag:
     t2 = BashOperator(
         task_id='print pwd',
