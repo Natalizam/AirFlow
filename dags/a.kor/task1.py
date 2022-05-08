@@ -12,7 +12,7 @@ def print_ds(ds):
 
 
 with DAG(
-    'task_1_r_baldaev',
+    'task1_a.kor',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -25,7 +25,7 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
-    tags=['a.kor-1'],
+    tags=['a.kor_1'],
 ) as dag:
 
     t1 = BashOperator(

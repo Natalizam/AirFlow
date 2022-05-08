@@ -12,7 +12,7 @@ def print_task_number(task_number):
 
 
 with DAG(
-    'task_2_r_baldaev',
+    'task2_a.kor',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -25,7 +25,7 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
-    tags=['a.kor-2'],
+    tags=['a.kor_2'],
 ) as dag:
     curr_task = None
     for i in range(10):
