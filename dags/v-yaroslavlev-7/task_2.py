@@ -1,7 +1,15 @@
-from airflow import DAG
+"""
+Test documentation
+"""
 from datetime import datetime, timedelta
+from textwrap import dedent
+
+# Для объявления DAG нужно импортировать класс из airflow
+from airflow import DAG
+
+# Операторы - это кирпичики DAG, они являются звеньями в графе
+# Будем иногда называть операторы тасками (tasks)
 from airflow.operators.bash import BashOperator
-from airflow.operators.python import PythonOperator
 with DAG(
     'task_2_v-yaroslavlev-7',
     # Параметры по умолчанию для тасок
