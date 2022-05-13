@@ -21,7 +21,7 @@ with DAG(
     catchup=False,
 ) as dag:
 
-    start = DummyOperator(task_id="start_dummy")
+    start = DummyOperator(task_id="start")
 
     def choose_course():
         return (
@@ -50,6 +50,6 @@ with DAG(
         op_kwargs={"message": "Not a startML course, sorry"},
         dag=dag,
     )
-    end = DummyOperator(task_id="end_dummy")
+    end = DummyOperator(task_id="end")
 
     start >> branching >> [start_ml, not_start_ml] >> end
