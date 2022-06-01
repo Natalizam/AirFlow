@@ -27,7 +27,7 @@ with DAG(
 
 
     t1 = BashOperator(
-        task_id = 'pwd',
+        task_id = 'eiv pwd',
         bash_command='pwd'
         
     )
@@ -38,7 +38,7 @@ with DAG(
         return 'Whatever you return gets printed in the logs'
 
     t2 = PythonOperator(
-    task_id='print_the_context',  
+    task_id='eiv print_the_context',  
     python_callable=print_context,  
     )
     
