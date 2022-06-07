@@ -27,8 +27,8 @@ with DAG(
     	return ds 
 
     t2 = PythonOperator(
-        task_id='print_ds',  # в id можно делать все, что разрешают строки в python
+        task_id='print_ds',  
         python_callable=printds) 
 
-t1 >>> t2 
+t1 >> t2 
 
