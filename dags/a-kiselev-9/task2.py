@@ -1,11 +1,12 @@
 from airflow import DAG
 from airflow.operators.bash import BashOperator
-from airflow.operators.python_operator import PythonOperator
+from airflow.operators.python import PythonOperator
+from datetime import datetime, timedelta
 
 
 
 with DAG(
-    'task_2'
+    'task_2',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
