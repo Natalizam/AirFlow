@@ -1,5 +1,6 @@
 from airflow import DAG
 from airflow.operators.bash import BashOperator
+from airflow.operators.python_operator import PythonOperator
 
 
 
@@ -12,22 +13,24 @@ with DAG(
         'email_on_retry': False,
         'retries': 1,
         'retry_delay': timedelta(minutes=5), # timedelta из пакета datetime
-         }
-    # Описание DAG (не тасок, а самого DAG)
+         },
     description='A simple tutorial DAG',
-    # Как часто запускать DAG
     schedule_interval=timedelta(days=1),
-    # С какой даты начать запускать DAG
-    # Каждый DAG "видит" свою "дату запуска"
-    # это когда он предположительно должен был
     start_date=datetime(2022, 1, 1),
-    # Запустить за старые даты относительно сегодня
-    # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
-    catchup=False,
-    # теги, способ помечать даги
-    tags=['example'],
+    catchup=False
 ) as dag:
     t1 = BashOperator(
-        task_id='print_date',  # id, будет отображаться в интерфейсе
-        bash_command='pwd',  # какую bash команду выполнить в этом таске
+        task_id='print_date',
+        bash_command='pwd',
     )
+
+    def printds(ds, **kwargs):
+        print(ds)
+        return ds
+
+    t2 = PythonOperator(
+        task_id='python1',
+        python_callable=printds
+    )
+
+t1>>t2
