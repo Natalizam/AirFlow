@@ -37,8 +37,9 @@ with DAG(
     bash_command="pwd"
     )
 
+
+
     def print_context(ds):
-        # В ds Airflow за нас подставит текущую логическую дату - строку в формате YYYY-MM-DD
         print(ds)
         return 'Whatever you return gets printed in the logs'
 
@@ -46,4 +47,6 @@ with DAG(
         task_id='print_the_context',
         python_callable=print_context
     )
+
+
 t_bash >> t_py
