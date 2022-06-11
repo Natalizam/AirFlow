@@ -3,6 +3,7 @@ from airflow.operators.python_operator import PythonOperator
 from datetime import datetime, timedelta
 from airflow import DAG
 
+
 with DAG(
     'tutorial',
     # Параметры по умолчанию для тасок
@@ -45,7 +46,7 @@ with DAG(
 
     t_py = PythonOperator(
         task_id='print_the_context',
-        python_callable=print_context
+        python_callable=print_context #dfdfdfg
     )
 
 
