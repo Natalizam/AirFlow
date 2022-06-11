@@ -40,7 +40,7 @@ with DAG(
 
 
     def print_context(ds):
-        print(ds)
+        print(ds) #ds
         return 'Whatever you return gets printed in the logs'
 
     t_py = PythonOperator(
