@@ -9,7 +9,7 @@ from airflow import DAG
 from textwrap import dedent
 
 with DAG(
-    'tutorial',
+    'hw_5_a-tkachenko',
     # Параметры по умолчанию для тасок
     default_args={
         'depends_on_past': False,
