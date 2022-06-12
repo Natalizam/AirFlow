@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from airflow import DAG
 
 with DAG(
-    'tutorial',
+    'hw_6_a-tkachenko',
     # Параметры по умолчанию для тасок
     default_args={
         'depends_on_past': False,
