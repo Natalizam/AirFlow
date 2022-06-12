@@ -6,7 +6,7 @@ from airflow.models import Variable
 
 
 with DAG(
-    'xcom_dag',
+    'hw_12_a-tkachenko',
     start_date=datetime(2021, 1, 1),
     max_active_runs=2,
     schedule_interval=timedelta(minutes=30),
