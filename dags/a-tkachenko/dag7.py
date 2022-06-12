@@ -19,7 +19,7 @@ def xcom_test_pull(ti):
     print(pull_res)
 
 with DAG(
-    'xcom_dag',
+    'hw_9_a-tkachenko',
     start_date=datetime(2021, 1, 1),
     max_active_runs=2,
     schedule_interval=timedelta(minutes=30),
