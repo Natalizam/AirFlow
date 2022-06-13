@@ -5,7 +5,7 @@ from airflow.operators.python_operator import PythonOperator
 from datetime import datetime, timedelta
 
 with DAG(
-        'dv_dag_m2_l11_s2',
+        'hw_2_d-voykov-9',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -24,7 +24,7 @@ with DAG(
         bash_command='pwd',
     )
 
-    def print_context(ds, **kwargs):
+    def print_context(ds):
         print(ds)
         return 'ds was printed'
 
