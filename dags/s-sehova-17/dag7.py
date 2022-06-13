@@ -23,23 +23,23 @@ with DAG(
     catchup=False,
     tags=['example'],
 ) as dag:
-    for i in range(10):
-        t71 = BashOperator(
-            task_id='bash_task_' + str(i),
-            bash_command="echo $NUMBER",
-            env={"NUMBER": i},
-        )
-    
     def print_context(task_number, ts, run_id):
         print(f"task number is: {task_number}")
-        print(ts, run_id)
+        print(ts)
+        print(run_id)
         
-    for i in range(10, 30):    
-        t72 = PythonOperator(
-            task_id='python_task_' + str(i),
-            python_callable=print_context,
-            op_kwargs = "task number is: i"
-        )
+    for i in range(30):
+        if i < 10:
+            t71 = BashOperator(
+                task_id='bash_task_' + str(i),
+                bash_command=f"echo {i}",
+            )
+        else:
+            t72 = PythonOperator(
+                task_id='python_task_' + str(i),
+                python_callable=print_context,
+                op_kwargs ={'task_number': i},
+            )
         
 t71.doc_md = dedent(
             f"""\
