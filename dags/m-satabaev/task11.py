@@ -1,11 +1,16 @@
+from airflow.hooks.base import BaseHook
+import psycopg2
 from airflow import DAG
 from datetime import timedelta, datetime
+
+from airflow.models import Variable
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from textwrap import dedent
+from psycopg2.extras import RealDictCursor
 
 with DAG(
-        'murad_satabaev_ninth_dag',
+        'murad_satabaev_eleventh_dag',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -20,25 +25,13 @@ with DAG(
         catchup=False,
         tags=['murad_tag'],
 ) as dag:
-
-    def push_xcom():
-        return 'Airflow tracks everything'
-
-    def pull_xcom(ti):
-        ti.xcom_pull(
-            key='return_value',
-            task_ids='push_xcom'
-        )
+    def get_variable():
+        print(Variable.get('is_startml'))
 
 
     t1 = PythonOperator(
-        task_id='push_xcom',
-        python_callable=push_xcom,
+        task_id='get_variable',
+        python_callable=get_variable,
     )
 
-    t2 = PythonOperator(
-        task_id='pull_xcom',
-        python_callable=pull_xcom,
-    )
-
-    t1 >> t2
+    t1
