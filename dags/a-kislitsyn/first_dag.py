@@ -16,7 +16,7 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
-    description = 'DAG, который будет содержать BashOperator и PythonOperator. В функции PythonOperator примите аргумент ds и распечатайте его. '
+    description = 'DAG, который будет  содержать BashOperator и PythonOperator. В функции PythonOperator примите аргумент ds и распечатайте его. '
                   'Можете распечатать дополнительно любое другое сообщение. В BashOperator выполните команду pwd',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 6, 11),
