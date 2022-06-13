@@ -7,7 +7,7 @@ from textwrap import dedent
 
 
 with DAG(
-    's-sehova-17-1',
+    's-sehova-17',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -23,16 +23,29 @@ with DAG(
     catchup=False,
     tags=['example'],
 ) as dag:
+    for i in range(10):
+        t71 = BashOperator(
+            task_id='bash_task_' + str(i),
+            bash_command="echo $NUMBER",
+            env={"NUMBER": i},
+        )
+    
     def print_context(task_number, ts, run_id):
         print(f"task number is: {task_number}")
-        print(ts)
-        print(run_id)
+        print(ts, run_id)
         
-    for i in range(20):    
+    for i in range(10, 30):    
         t72 = PythonOperator(
-            task_id=f"t3_pt_{i}",
+            task_id='python_task_' + str(i),
             python_callable=print_context,
             op_kwargs = "task number is: i"
         )
+        
+t71.doc_md = dedent(
+            f"""\
+            #### Python operator doc
+            **Example task** * python_command * = `task_number({i})`
+            """
+        )
 
-t72
+t71>>t72
