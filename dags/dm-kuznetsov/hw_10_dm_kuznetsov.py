@@ -28,7 +28,7 @@ with DAG(
     def pull_xcom(ti):
         pull_res = ti.xcom_pull(
         key="return_value",
-        task_ids='pushing_to_xcom',
+        task_ids='push_xcom',
         )
         print(f'pull_res = {pull_res}')
 
