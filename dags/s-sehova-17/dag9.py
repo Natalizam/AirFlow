@@ -2,13 +2,9 @@ from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 
 from datetime import datetime, timedelta
-<<<<<<< Updated upstream:dags/s-sehova-17/dag2.py
-from textwrap import dedent
-=======
->>>>>>> Stashed changes:dags/s-sehova-17/dag9.py
 
 with DAG(
-    'tutorial',
+    's-sehova-17-9',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -22,26 +18,6 @@ with DAG(
     start_date=datetime(2022, 1, 1),
 
     catchup=False,
-<<<<<<< Updated upstream:dags/s-sehova-17/dag2.py
-    tags=['example'],
-) as dag:
-    date = "{{ ds }}"
-    t1 = BashOperator(
-        task_id = 'pwd',
-        bash_command='pwd'
-	)
-    
-    def print_context(ds):
-        print(ds)
-        return ds
-        
-    t2 = PythonOperator(
-        task_id='print_the_context',
-        python_callable=print_context,
-    )
-
-t1>>t2
-=======
     tags=['s-sehova-17'],
 ) as dag:
     def put(ti):
@@ -66,4 +42,3 @@ t1>>t2
         )
         
 t91 >> t92
->>>>>>> Stashed changes:dags/s-sehova-17/dag9.py
