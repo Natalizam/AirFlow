@@ -33,7 +33,6 @@ with DAG(
             #### Task 1 Documentation
                 **current** _bash_ command loops `echo {i}`                          
                 """
-
             )   
 
         else:
