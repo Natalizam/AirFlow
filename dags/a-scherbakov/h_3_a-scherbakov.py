@@ -4,7 +4,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'lesson2',
+    'lesson3',
     # Параметры по умолчанию для тасок
     default_args={
         # Если прошлые запуски упали, надо ли ждать их успеха
@@ -21,26 +21,26 @@ with DAG(
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
     # Описание DAG (не тасок, а самого DAG)
-    description='Lesson 2',
+    description='Lesson 3',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
     # теги, способ помечать даги
-    tags=['les2'],
+    tags=['les3'],
 ) as dag:
-    t1 = BashOperator(
-    task_id='print_date',  # id, будет отображаться в интерфейсе
-    bash_command='pwd',  # какую bash команду выполнить в этом таске
-    )
+    for i in range(10):
+        t1 = BashOperator(
+        task_id=f'loop{i}',  # id, будет отображаться в интерфейсе
+        bash_command = f"echo {i}",  # какую bash команду выполнить в этом таске
+        )
 
-    def print_ds(ds):
-    # В ds Airflow за нас подставит текущую логическую дату - строку в формате YYYY-MM-DD
-    	print(ds)
-    	return 'Whatever you return gets printed in the logs'
-
-    t2 = PythonOperator(
-    	task_id='print_ds',  # нужен task_id, как и всем операторам
-    	python_callable=print_ds,  # свойственен только для PythonOperator - передаем саму функцию
-    )
+    def print_tn(task_number):
+    	return f"task number is: {task_number}"
+    for i in range(20):
+        t2 = PythonOperator(
+    	task_id=f'print_tn{i}',  # нужен task_id, как и всем операторам
+    	python_callable=print_tn,  # свойственен только для PythonOperator - передаем саму функцию
+        op_kwargs={'task_number': i},
+        )
 
     t1 >> t2
