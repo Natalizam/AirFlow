@@ -10,12 +10,13 @@ from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 from airflow.operators.python import BranchPythonOperator
 from airflow.operators.dummy import DummyOperator
-from airflow.models import Variable
+
 
 from datetime import datetime, timedelta
 
 
 def choosing_task():
+    from airflow.models import Variable
     is_startml = bool(Variable.get('is_startml'))
     if is_startml: return 'startml_desc'
     else: return 'not_startml_desc'
@@ -58,11 +59,12 @@ with DAG(
         task_id='not_startml_desc',
         python_callable=task2,
     )
-    t0 = DummyOperator(
-        task_id='t0',
+    t_start = DummyOperator(
+        task_id='begin',
     )
     t_end = DummyOperator(
-        task_id = 't_end',
+        task_id = 'finish',
+        trigger_rule='none_failed_or_skipped' # этот параметр определяетс статус таска succsess, если хотя бы одна задача выше не была failed или skipped
     )
 
-    t0 >> branch_task >> t_end
+    t_start >> branch_task >> [t1, t2] >> t_end
