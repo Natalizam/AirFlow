@@ -13,8 +13,8 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
-    description='Exercise No.3',
-    start_date=datetime('2022-06-16')
+    description='Exercise No.1',
+    start_date=datetime(2022, 6, 16)
 ) as dag:
 
     def print_task_number(task_number):
@@ -32,6 +32,6 @@ with DAG(
                 python_callable=print_task_number,
                 op_kwargs={'task_number': i}
             )
-            
-    t1 >> t2
 
+    t1 >> t2
+    
