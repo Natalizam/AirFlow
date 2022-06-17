@@ -3,6 +3,7 @@ from airflow import DAG
 from textwrap import dedent
 from airflow.operators.bash import BashOperator
 
+
 with DAG(
     'task-4-zamyatina',
     default_args={
